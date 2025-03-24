@@ -5,7 +5,7 @@ const dbConnect = async () => {
     console.log("Database connected..");
   });
 
-  await mongoose.connect(process.env.DATABASE_URL);
+  await mongoose.connect(`${process.env.DATABASE_URL}/bgRemovalUsers`);
 };
 
 export default dbConnect; // ✅ Use default export
