@@ -11,14 +11,17 @@ const clerkWebHooks = async (req, res) => {
 
     const { data, type } = req.body;
 
+    const payload = JSON.parse(req.body.toString());
+    console.log("Parsed Webhook Data:", payload);
+
     switch (type) {
       case "user.created": {
         const userData = {
           clerkId: data.id,
-          email: data.email_addresses[0].email_address,
-          firstName: data.first_name,
-          lastName: data.last_name,
-          photo: data.image_url,
+          email: data.email_addresses?.[0]?.email_address || "",
+          firstName: data.first_name || "",
+          lastName: data.last_name || "",
+          photo: data.image_url || "",
         };
 
         await userModel.create(userData);
