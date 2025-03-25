@@ -1,11 +1,11 @@
-import { Svix } from "svix";
+import { Webhook } from "svix";
 import userModel from "../models/userModel.js";
 // API controller function ro manage clerk user with database
 //http://localhost:4000/api/v1/user/webhooks
 
 const clerkWebHooks = async (req, res) => {
   try {
-    const wHook = await Svix(process.env.CLERK_WEBHOOK_SECRET);
+    const wHook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
     await wHook.verify(JSON.stringify(req.body), {
       "svix-id": req.headers["svix-id"],
       "svix-timestamp": req.headers["svix-timestamp"],
